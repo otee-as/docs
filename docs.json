@@ -14,12 +14,14 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Quick Start",
             "pages": [
               "index",
               "get-started/sign-up",
-              "quickstart",
-              "development"
+              "get-started/onboard-a-device",
+              "get-started/create-a-project",
+              "get-started/deploy-a-project",
+              "get-started/monitor-a-project"
             ]
           },
           {
