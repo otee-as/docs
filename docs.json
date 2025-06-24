@@ -17,7 +17,7 @@
             "group": "Get Started",
             "pages": [
               "index",
-              "sign-up",
+              "get-started/sign-up",
               "quickstart",
               "development"
             ]
