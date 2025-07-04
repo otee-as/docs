@@ -3,58 +3,35 @@ title: "Onboard a Device"
 description: "Welcome to the home of your new documentation"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.png"
-  alt="Hero Light"
-/>
+<Tip>
 
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.png"
-  alt="Hero Dark"
-/>
+System requirements for devices hosting OTee vPLCs: 
 
-## Setting up
+Linux OS
 
-The first step to world-class documentation is setting up your editing environments.
+Internet connection and open 7422 port (outbound)
 
-<CardGroup cols={2}>
-  <Card title="Edit Your Docs" icon="pen-to-square" href="https://mintlify.com/docs/quickstart">
-    Get your docs set up locally for easy development
-  </Card>
-  <Card title="Preview Changes" icon="image" href="https://mintlify.com/docs/development">
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
+Sufficient CPU and memory to support the intended control logic and cycle times (for small projects, pretty much any machine will do!)
 
-## Make it yours
+CURL and tar installed on the OS
 
-Update your docs to your brand and add valuable content for the best user conversion.
+Docker and ‘docker compose’ (v2 or higher) installed on the OS (see next info box below)
 
-```iec61131
-difference := minuend - subtrahend;
+Current user needs to be part of the Docker user group (or use sudo)
+To add your own user to the Docker user group, run this command:
 
-IF difference < 0 THEN
-    ResultIsNegative := TRUE;
-ELSE
-    ResultIsNegative := FALSE;
-END_IF;
-
-CalcDifference := difference;
+```
+sudo groupadd docker
+sudo usermod -aG docker $USER
+// now logout and login.
 ```
 
-<CardGroup cols={2}>
-  <Card title="Customize Style" icon="palette" href="https://mintlify.com/docs/settings/global">
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card title="Reference APIs" icon="code" href="https://mintlify.com/docs/api-playground/openapi">
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card title="Add Components" icon="screwdriver-wrench" href="https://mintlify.com/docs/content/components/accordions">
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card title="Get Inspiration" icon="stars" href="https://mintlify.com/customers">
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+Optional:
+
+Ethernet port (for connecting to remote I/O)
+
+The following chip architectures of target devices are currently supported:
+
+ARM32, ARM64, x86_64
+
+</Tip>
