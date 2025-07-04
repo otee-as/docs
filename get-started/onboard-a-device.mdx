@@ -7,17 +7,18 @@ description: "Welcome to the home of your new documentation"
 
 System requirements for devices hosting OTee vPLCs: 
 
-Linux OS
+* Linux OS
 
-Internet connection and open 7422 port (outbound)
+* Internet connection and open 7422 port (outbound)
 
-Sufficient CPU and memory to support the intended control logic and cycle times (for small projects, pretty much any machine will do!)
+* Sufficient CPU and memory to support the intended control logic and cycle times (for small projects, pretty much any machine will do!)
 
-CURL and tar installed on the OS
+* CURL and tar installed on the OS
 
-Docker and ‘docker compose’ (v2 or higher) installed on the OS (see next info box below)
+* Docker and ‘docker compose’ (v2 or higher) installed on the OS (see next info box below)
 
-Current user needs to be part of the Docker user group (or use sudo)
+* Current user needs to be part of the Docker user group (or use sudo)
+
 To add your own user to the Docker user group, run this command:
 
 ```
@@ -28,10 +29,10 @@ sudo usermod -aG docker $USER
 
 Optional:
 
-Ethernet port (for connecting to remote I/O)
+* Ethernet port (for connecting to remote I/O)
 
-The following chip architectures of target devices are currently supported:
+* The following chip architectures of target devices are currently supported:
 
-ARM32, ARM64, x86_64
+* ARM32, ARM64, x86_64
 
 </Tip>
