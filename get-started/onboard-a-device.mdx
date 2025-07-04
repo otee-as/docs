@@ -1,6 +1,6 @@
 ---
 title: "Onboard a Device"
-description: "Welcome to the home of your new documentation"
+description: "Deploying an OTee vPLC to your setup requires a hardware device on your network from which it can be run. This could be an existing, physical and open PLC, or any off-the-shelf hardware that fulfils the system requirements (see below). "
 ---
 
 <Tip>
@@ -11,7 +11,7 @@ System requirements for devices hosting OTee vPLCs:
 
 * Internet connection and open 7422 port (outbound)
 
-* Sufficient CPU and memory to support the intended control logic and cycle times (for small projects, pretty much any machine will do!)
+* Sufficient CPU and memory to support the intended control logic and cycle times (for small projects, pretty much any machine will do! - Note that if you're using the Free Tier, your device needs to have at least 2GB of disk space and 1GB of RAM available)
 
 * CURL and tar installed on the OS
 
@@ -34,5 +34,17 @@ Optional:
 * The following chip architectures of target devices are currently supported:
 
 * ARM32, ARM64, x86_64
+
+</Tip>
+
+<Tip>
+
+Read how to install docker and other required components for various Linux distributions here:
+
+* Ubuntu: [Ubuntu convenience script] (https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script) 
+
+* Debian: [Debian convenience script] (https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script) 
+
+* Follow any of the above links and find more Linux distributions in the side navigation panel
 
 </Tip>
