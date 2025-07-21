@@ -25,7 +25,7 @@
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Development Environment",
             "pages": [
               "essentials/markdown",
               "essentials/code",
