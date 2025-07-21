@@ -27,12 +27,25 @@
           {
             "group": "Development Environment",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "ide/access",
+              "ide/user-interface"
+            ]
+          },
+          {
+            "group": "Projects",
+            "pages": [
+              "projects/create-import",
+              "projects/pous",
+              "projects/resource-cfg",
+              "projects/io-cfg"
+            ]
+          },
+          {
+            "group": "Virtual PLC",
+            "pages": [
+              "virtual-plc/devices",
+              "virtual-plc/deployments",
+              "virtual-plc/monitoring"
             ]
           }
         ]
