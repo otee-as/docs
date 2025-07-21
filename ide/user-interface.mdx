@@ -22,3 +22,56 @@ Selecting a POU in the navigation pane will load its content into the code windo
   src="/images/ui-project-browser-dark.png"
   alt="Project Browser Dark"
 />
+
+## Code Editor
+
+The Code Editor provides basic code formatting and styling tools to support your Structured Text programs. Use the navigation pane to control which file or POU to show in this window.
+
+<img
+  className="block dark:hidden"
+  src="/images/ui-code-editor-light.png"
+  alt="Code Editor Light"
+/>
+
+<img
+  className="hidden dark:block"
+  src="/images/ui-code-editor-dark.png"
+  alt="Code Editor Dark"
+/>
+
+You’ll find an increasing number of auto-complete suggestions to assist you in efficient and high-quality coding. 
+
+The static code analyzer will flag lines of code that aren’t compliant with IEC 61131 and are likely to cause compilation to fail. Hover with the cursor over the highlighted text to get a description of the type of error detected by the static analyzer.
+
+<Info>
+
+Note that comments in the code must be started with “(*” and ended with “*)”. Using “//” will not be flagged as incorrect in the static code analyzer but result in compilation errors.
+
+</Info>
+
+## Tag Editor
+
+The Tag Editor to the right-hand side of the code editor shows an overview of tags in context of the currently loaded POU. This is where you add, define or remove tags and edit their properties and metadata.
+
+<img
+  className="block dark:hidden"
+  src="/images/ui-tag-editor-light.png"
+  alt="Tag Editor Light"
+/>
+
+<img
+  className="hidden dark:block"
+  src="/images/ui-tag-editor-dark.png"
+  alt="Tag Editor Dark"
+/>
+
+Variables can be assigned additional attributes (like persistent, constant, retain). These attributes are assigned to a variable group and apply to all variables within that group.
+
+Depending on the context of the currently loaded POU, available categories of variables will differ. Globally defined variables in the resource configuration can be included into a POU as a variable with the same name in the External category.
+
+Mandatory input for any variable are a data type and a name. Note that editing the name of an already referenced variable here will dynamically change the variable’s name in the code, too. Variable names must be unique within a POU and the editor will prevent you from creating multiple variables with the same name.
+
+Variables in certain categories allow for additional, optional input like memory address (linking them to I/O) and initial values. Assigning memory addresses requires the configuration of at least one communication protocol driver. You are also encouraged to add a descriptive text for a variable in the “documentation” field to make it easier for collaborators to understand your code.
+
+You can delete a variable (or an entire variable group) by right-clicking on it and selecting “Delete” from the context menu.
+
