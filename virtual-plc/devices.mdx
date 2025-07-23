@@ -1,0 +1,112 @@
+---
+title: "Devices"
+description: "Onboard a virtual PLC host device."
+---
+
+## Onboarding / Installing a Device
+
+Deploying an OTee vPLC to your setup requires a hardware device on your network from which it can be run. This could be an existing, physical and open PLC, or any off-the-shelf hardware that fulfils the system requirements (see below).
+
+<Info>
+
+System requirements for devices hosting OTee vPLCs: 
+
+* Linux OS
+
+* Internet connection and open 7422 port (outbound)
+
+* Sufficient CPU and memory to support the intended control logic and cycle times (for small projects, pretty much any machine will do! - Note that if you're using the Free Tier, your device needs to have at least 2GB of disk space and 1GB of RAM available)
+
+* CURL and tar installed on the OS
+
+* Docker and ‘docker compose’ (v2 or higher) installed on the OS (see next info box below)
+
+* Current user needs to be part of the Docker user group (or use sudo)
+
+To add your own user to the Docker user group, run this command:
+
+```
+sudo groupadd docker
+sudo usermod -aG docker $USER
+// now logout and login.
+```
+
+Optional:
+
+* Ethernet port (for connecting to remote I/O)
+
+* The following chip architectures of target devices are currently supported:
+
+* ARM32, ARM64, x86_64
+
+</Info>
+
+<Tip>
+
+Read how to install docker and other required components for various Linux distributions here:
+
+<CardGroup>
+  <Card title="Ubuntu" href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script" icon="docker" horizontal />
+  <Card title="Debian" href="https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script" icon="docker" horizontal />
+</CardGroup>
+
+* Follow any of the above links and find more Linux distributions in the side navigation panel
+
+</Tip>
+
+Switch to the device tab on the main navigation in the app’s header.
+
+Hit the plus sign to start the onboarding of a new device. In the “Onboard device” modal, name your device and add a description (optional). It is important that you select the correct chip architecture for your device form the drop-down. 
+
+<img
+  className="block dark:hidden mx-auto"
+  src="/images/onboard-device-light-1.png"
+  alt="Onboard 1 Light"
+  width="400"
+/>
+
+<img
+  className="hidden dark:block mx-auto"
+  src="/images/onboard-device-dark-1.png"
+  alt="Onboard 1 Dark"
+  width="400"
+/>
+
+Proceeding will then create a CURL command for you to copy and run from your host device’s terminal. This will install an OTee device agent and the latest available OTee runtime version on your machine - your first virtual PLC is born!
+
+<img
+  className="block dark:hidden mx-auto"
+  src="/images/onboard-device-light-2.png"
+  alt="Onboard 2 Light"
+  width="400"
+/>
+
+<img
+  className="hidden dark:block mx-auto"
+  src="/images/onboard-device-dark-2.png"
+  alt="Onboard 2 Dark"
+  width="400"
+/>
+
+<Info>
+
+Troubleshooting: Once the installation on your host device is complete, verify that the agent is running by executing the following command (replace <your-org-name> with your organization’s name as found in the zip file name):
+`docker logs -f agent-agent_<your-device-name>`
+This command will display the logs of the running agent, confirming that is has been successfully installed or providing useful troubleshooting info otherwise.
+
+</Info>
+
+## Offboarding / Uninstalling a Device
+
+To remove all OTee components from your device, the following command can be executed in the terminal (bash).
+
+Paste and run the following script:
+
+```bash lines
+# Delete containers based on image name
+docker ps -a --format '{{.ID}} {{.Image}}' | awk '$2 ~ /nats:|otee/ {print $1}' | xargs -r docker rm -f && \
+# Delete images based on repository:tag
+docker images --format '{{.Repository}}:{{.Tag}} {{.ID}}' | awk '$1 ~ /nats:|otee/ {print $2}' | xargs -r docker rmi -f && \
+# Clean up unused networks (including non OTee networks)
+docker network prune -f
+```
