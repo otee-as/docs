@@ -23,7 +23,7 @@ Make sure that your project is attached to the correct vPLC before you deploy yo
 
 ## Download your project to your vPLC
 
-Once you have attached your project to a vPLC, the “Download project to device” button at the top of your project browser becomes enabled. Click it and choose "Use initial tag values", then hit "Apply". This will first save and compile your project and, if successful, deploy it to the selected target runtime. Your code is now live!
+Once you have attached your project to a vPLC, the “Download project to device” button at the top of your project browser becomes enabled.  
 
 <img
   className="block dark:hidden"
@@ -35,4 +35,32 @@ Once you have attached your project to a vPLC, the “Download project to device
   className="hidden dark:block"
   src="/images/project-download-options-dark.png"
   alt="Runtime Selection Dark"
+/>
+
+Use current tag values: The runtime downloads and executes the new PLC program. It uses the last known tag values from the currently running program.
+
+Use initial tag values: The runtime downloads and executes the new PLC program. It initializes all tags and does not take into consideration any tag values from previous or currently running programs.
+
+Use values from tag file: The runtime downloads and executes the new PLC program. It uses the tag values from the particular tag file you select from the dropdown list. To create such a tag file - a snapshot of all tag values at that particular moment - you need to enter the project settings at the top of your project browser and select “Create Tag File” from the context menu.
+
+Hitting "Apply" will first save and compile your project and, if successful, deploy it to the selected target runtime with the chosen options. Your code is now live!
+
+## Manage Releases and Rollbacks
+
+Accidents happen. If you want to roll back your project to a previous version, you can do so via the release history button on the top of your project browser. 
+
+A release is auto-created every time you compile your code, either through the compile button, or by downloading your project to a device as described above.
+
+In the release history modal (see screenshot), you also have the option to manually create a release - this will result in compilation of your code as well.
+
+<img
+  className="block dark:hidden"
+  src="/images/release-history-light.png"
+  alt="Release History Light"
+/>
+
+<img
+  className="hidden dark:block"
+  src="/images/release-history-dark.png"
+  alt="Release History Dark"
 />
