@@ -5,15 +5,27 @@ description: "Control your resources through tasks and instances of programs."
 
 The software model for PLCs, as defined in the IEC 61131-3 standard, consists of, at the top level, a configuration. The configuration defines the hardware structure and logic of the PLC system and contains resources, which are able to execute programs. These resources are controlled by tasks, which invoke the execution of Program Organization Units (POUs).
 
+To create your own project’s configuration, select the “Configuration” node in the project tree browser on the left-hand side of the screen. 
+
 <img
   className="block dark:hidden mx-auto"
-  src="/images/runtime-selection-light.png"
-  alt="Runtime Selection Light"
+  src="/images/resource-cfg-light.png"
+  alt="Resource Configuration Light"
 />
 
 <img
   className="hidden dark:block mx-auto"
-  src="/images/runtime-selection-dark.png"
-  alt="Runtime Selection Dark"
+  src="/images/resource-cfg-dark.png"
+  alt="Resource Configuration Dark"
 />
 
+
+A configuration on the OTee platform consists of one resource, which holds one or multiple tasks, each assigned an interval or scan time. Inside a task, you can create instances of the programs that you have defined in your project. Note that these instances will be executed in the order of their appearance. To modify this order, simply grab a task or instance by its handle, then drag and drop it into the desired position.
+
+You can also create global variables in this configuration, which can then be referenced as “External” variables inside your various programs. Initial values, memory addresses and descriptions can be assigned to global variables just like described in the Tag Editor section in the User Interface chapter.
+
+You will find transmitter symbols on the resource and instance levels. These can be adjusted to avoid unnecessary use of bandwidth and optimize performance: During every interval of a task, the instances of programs therein will populate their respective transmitters with updated values of your project’s tags. However, you can control how often these values should be published by the runtime through manipulating the according transmitter settings on the instance level. The transmitter on the resource level (in the upper right corner of the image to the right) controls how frequently global tag values are getting published by the runtime.
+
+<Info>
+At the time of writing, global tags are transmitted at a 250ms interval and are not yet affected by manipulation of the user’s transmitter settings.
+</Info>
