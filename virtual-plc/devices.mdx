@@ -3,36 +3,93 @@ title: "Devices"
 description: "Onboard a virtual PLC host device."
 ---
 
-So far, your project only lives as code in the cloud. Let's change that and execute it on your local edge device.
+Deploying an OTee vPLC to your setup requires a hardware device on your network from which it can be run. This could be an existing, physical and open PLC, or any off-the-shelf hardware that fulfils the system requirements (see below).
 
-## Connect your vPLC
+<Info>
 
-Make sure that your project is attached to the correct vPLC before you deploy your logic into production. Click on “Click here to select a vPLC” just below your project name to open the runtime selection dropdown and select the vPLC you've just onboarded. If you cannot see your runtime in the list of options, please repeat the "Onboard a Device" step in this quick start guide.
+System requirements for devices hosting OTee vPLCs: 
+
+* Linux OS
+
+* Internet connection and open 7422 port (outbound)
+
+* Sufficient CPU and memory to support the intended control logic and cycle times (for small projects, pretty much any machine will do! - Note that if you're using the Free Tier, your device needs to have at least 2GB of disk space and 1GB of RAM available)
+
+* CURL and tar installed on the OS
+
+* Docker and ‘docker compose’ (v2 or higher) installed on the OS (see next info box below)
+
+* Current user needs to be part of the Docker user group (or use sudo)
+
+To add your own user to the Docker user group, run this command:
+
+```
+sudo groupadd docker
+sudo usermod -aG docker $USER
+// now logout and login.
+```
+
+Optional:
+
+* Ethernet port (for connecting to remote I/O)
+
+* The following chip architectures of target devices are currently supported:
+
+* ARM32, ARM64, x86_64
+
+</Info>
+
+<Tip>
+
+Read how to install docker and other required components for various Linux distributions here:
+
+<CardGroup>
+  <Card title="Ubuntu" href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script" icon="docker" horizontal />
+  <Card title="Debian" href="https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script" icon="docker" horizontal />
+</CardGroup>
+
+* Follow any of the above links and find more Linux distributions in the side navigation panel
+
+</Tip>
+
+Switch to the device tab on the main navigation in the app’s header.
+
+Hit the plus sign to start the onboarding of a new device. In the “Onboard device” modal, name your device and add a description (optional). It is important that you select the correct chip architecture for your device form the drop-down. 
 
 <img
-  className="block dark:hidden"
-  src="/images/runtime-selection-light.png"
-  alt="Runtime Selection Light"
+  className="block dark:hidden mx-auto"
+  src="/images/onboard-device-light-1.png"
+  alt="Onboard 1 Light"
+  width="400"
 />
 
 <img
-  className="hidden dark:block"
-  src="/images/runtime-selection-dark.png"
-  alt="Runtime Selection Dark"
+  className="hidden dark:block mx-auto"
+  src="/images/onboard-device-dark-1.png"
+  alt="Onboard 1 Dark"
+  width="400"
 />
 
-## Download your project to your vPLC
-
-Once you have attached your project to a vPLC, the “Download project to device” button at the top of your project browser becomes enabled. Click it and choose "Use initial tag values", then hit "Apply". This will first save and compile your project and, if successful, deploy it to the selected target runtime. Your code is now live!
+Proceeding will then create a CURL command for you to copy and run from your host device’s terminal. This will install an OTee device agent and the latest available OTee runtime version on your machine - your first virtual PLC is born!
 
 <img
-  className="block dark:hidden"
-  src="/images/project-download-options-light.png"
-  alt="Runtime Selection Light"
+  className="block dark:hidden mx-auto"
+  src="/images/onboard-device-light-2.png"
+  alt="Onboard 2 Light"
+  width="400"
 />
 
 <img
-  className="hidden dark:block"
-  src="/images/project-download-options-dark.png"
-  alt="Runtime Selection Dark"
+  className="hidden dark:block mx-auto"
+  src="/images/onboard-device-dark-2.png"
+  alt="Onboard 2 Dark"
+  width="400"
 />
+
+<Info>
+
+Troubleshooting: Once the installation on your host device is complete, verify that the agent is running by executing the following command (replace <your-org-name> with your organization’s name as found in the zip file name):
+`docker logs -f agent-agent_<your-device-name>`
+This command will display the logs of the running agent, confirming that is has been successfully installed or providing useful troubleshooting info otherwise.
+
+</Info>
