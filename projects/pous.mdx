@@ -51,12 +51,54 @@ diff := CalcDifference(
 );
 ```
 
-
-
-
 ## Function Blocks
 
+Function blocks are segments of reusable code that have internal memory and can return different outputs even when the same inputs are used. In other words, the results of a function block are conditional on the previous output of the function block or the current state of the process.
 
+Below is a simple and shortened example of a function block defined in the Code Editor, together with the according variables defined in the Tag Editort.
+
+```javascript lines
+IF interlocks > 0 THEN
+  interlocked := TRUE;
+END_IF;
+
+IF commands.HMI_set_manual THEN
+  status.mode_manual := TRUE;
+  status.mode_program := FALSE;
+END_IF;
+```
+
+<Info>
+Note that in this example, “status” and “commands” are a custom structure data types. The code snippet is only an illustration of function block syntax.
+</Info>
+
+<img
+  className="block dark:hidden mx-auto"
+  src="/images/runtime-selection-light.png"
+  alt="Runtime Selection Light"
+/>
+
+<img
+  className="hidden dark:block mx-auto"
+  src="/images/runtime-selection-dark.png"
+  alt="Runtime Selection Dark"
+/>
+
+To call a function block from within another POU (e.g. in your main program), you’ll have to create a variable (in this example, FB_instance) and select your function block as a data type. Then, start typing “FB_instance” in the Code Editor and refer to the auto-complete suggestions to either call or refer to the instance of your function block:
+
+<img
+  className="block dark:hidden mx-auto"
+  src="/images/runtime-selection-light.png"
+  alt="Runtime Selection Light"
+/>
+
+<img
+  className="hidden dark:block mx-auto"
+  src="/images/runtime-selection-dark.png"
+  alt="Runtime Selection Dark"
+/>
+
+Calling the function block will list all available inputs and outputs for you to link to other variables or enter values directly:
 
 <img
   className="block dark:hidden mx-auto"
