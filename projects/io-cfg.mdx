@@ -1,38 +1,24 @@
 ---
-title: "I/O driver configuration"
+title: "I/O Driver Configuration"
 description: "Make your vPLC speak to equipment."
 ---
 
-So far, your project only lives as code in the cloud. Let's change that and execute it on your local edge device.
+In the top bar of your project browser pane, press the “Create an entity” button. Select “Driver configuration” from the drop-down menu in the “Type” field, then select “MODBUS” from the drop-down menu in the “Driver” field. This will create a Modbus node in your project browser tree. Select the node to access the driver configuration.
 
-## Connect your vPLC
-
-Make sure that your project is attached to the correct vPLC before you deploy your logic into production. Click on “Click here to select a vPLC” just below your project name to open the runtime selection dropdown and select the vPLC you've just onboarded. If you cannot see your runtime in the list of options, please repeat the "Onboard a Device" step in this quick start guide.
+## Modbus TCP
 
 <img
-  className="block dark:hidden"
-  src="/images/runtime-selection-light.png"
-  alt="Runtime Selection Light"
+  className="block dark:hidden mx-auto"
+  src="/images/modbus-cfg-light.png"
+  alt="Modbus Configuration Light"
 />
 
 <img
-  className="hidden dark:block"
-  src="/images/runtime-selection-dark.png"
-  alt="Runtime Selection Dark"
+  className="hidden dark:block mx-auto"
+  src="/images/modbus-cfg-dark.png"
+  alt="Modbus Configuration Dark"
 />
 
-## Download your project to your vPLC
+The configuration happens in two steps, where the first one is the client configuration itself, and the second one is the Modbus request configuration. You can create one or multiple clients, and within each client you can create one or multiple requests.
 
-Once you have attached your project to a vPLC, the “Download project to device” button at the top of your project browser becomes enabled. Click it and choose "Use initial tag values", then hit "Apply". This will first save and compile your project and, if successful, deploy it to the selected target runtime. Your code is now live!
-
-<img
-  className="block dark:hidden"
-  src="/images/project-download-options-light.png"
-  alt="Runtime Selection Light"
-/>
-
-<img
-  className="hidden dark:block"
-  src="/images/project-download-options-dark.png"
-  alt="Runtime Selection Dark"
-/>
+As you set up your requests (click on a request to expand or collapse it), you can map Modbus memory addresses to your own, user-defined symbols via the “Driver symbols” table for better readability and practical re-use throughout your project. In practice, when you assign a memory address to tags in your POUs or global variables, you will now be able to select the according symbols rather than working with the rather cryptic memory addresses directly.
