@@ -3,36 +3,66 @@ title: "POUs"
 description: "IEC 61131 Program Organization Units."
 ---
 
-So far, your project only lives as code in the cloud. Let's change that and execute it on your local edge device.
+Projects created in OTee adhere to the software model as described in the international IEC 61131-3 standard for programmable logic controllers (PLCs). Essential building blocks that together make a PLC project are program organization units, or POUs. The different types of POUs are functions, function blocks, and programs. 
 
-## Connect your vPLC
+## Functions
 
-Make sure that your project is attached to the correct vPLC before you deploy your logic into production. Click on “Click here to select a vPLC” just below your project name to open the runtime selection dropdown and select the vPLC you've just onboarded. If you cannot see your runtime in the list of options, please repeat the "Onboard a Device" step in this quick start guide.
+A function can be thought of as a subprogram (often an equation) that has no internal memory, so it returns a value rather than an output. This means that any time a function is invoked, if the same inputs are used, the same value will be returned, regardless of the number of times the function is used.
+
+Below is a simple example of a function defined in the Code Editor, together with the according variables and return type defined in the Tag Editor.
+
+```
+difference := minuend - subtrahend;
+IF difference < 0 THEN
+    ResultIsNegative := TRUE;
+ELSE
+    ResultIsNegative := FALSE;
+END_IF;
+CalcDifference := difference;
+```
 
 <img
-  className="block dark:hidden"
+  className="block dark:hidden mx-auto"
   src="/images/runtime-selection-light.png"
   alt="Runtime Selection Light"
 />
 
 <img
-  className="hidden dark:block"
+  className="hidden dark:block mx-auto"
   src="/images/runtime-selection-dark.png"
   alt="Runtime Selection Dark"
 />
 
-## Download your project to your vPLC
+## Function Blocks
 
-Once you have attached your project to a vPLC, the “Download project to device” button at the top of your project browser becomes enabled. Click it and choose "Use initial tag values", then hit "Apply". This will first save and compile your project and, if successful, deploy it to the selected target runtime. Your code is now live!
+
 
 <img
-  className="block dark:hidden"
-  src="/images/project-download-options-light.png"
+  className="block dark:hidden mx-auto"
+  src="/images/runtime-selection-light.png"
   alt="Runtime Selection Light"
 />
 
 <img
-  className="hidden dark:block"
-  src="/images/project-download-options-dark.png"
+  className="hidden dark:block mx-auto"
+  src="/images/runtime-selection-dark.png"
+  alt="Runtime Selection Dark"
+/>
+
+
+
+## Programs
+
+
+
+<img
+  className="block dark:hidden mx-auto"
+  src="/images/runtime-selection-light.png"
+  alt="Runtime Selection Light"
+/>
+
+<img
+  className="hidden dark:block mx-auto"
+  src="/images/runtime-selection-dark.png"
   alt="Runtime Selection Dark"
 />
