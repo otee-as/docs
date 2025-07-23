@@ -41,6 +41,19 @@ The name of the function POU (as it appears in your project browser on the left-
   alt="Function Tags Dark"
 />
 
+When calling the function from your program, you can assign the return value directly to a variable, but you can also make use of other output values as defined in your function:
+
+```javascript lines
+diff := CalcDifference(
+    minuend := 5,
+    subtrahend := 42,
+    ResultIsNegative => myBoolVar
+);
+```
+
+
+
+
 ## Function Blocks
 
 
