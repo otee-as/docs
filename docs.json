@@ -51,21 +51,21 @@
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "References",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Reference Documents",
             "pages": [
-              "api-reference/introduction"
+              "reference-documents/introduction"
             ]
           },
           {
             "group": "Endpoint Examples",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "reference-documents/endpoint/get",
+              "reference-documents/endpoint/create",
+              "reference-documents/endpoint/delete",
+              "reference-documents/endpoint/webhook"
             ]
           }
         ]
@@ -74,18 +74,13 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
           "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "href": "https://discord.gg/NnW64J7p",
+          "icon": "discord"
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://www.otee.io/blogs",
           "icon": "newspaper"
         }
       ]
