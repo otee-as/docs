@@ -3,6 +3,8 @@ title: "Devices"
 description: "Onboard a virtual PLC host device."
 ---
 
+## Onboarding / Installing a Device
+
 Deploying an OTee vPLC to your setup requires a hardware device on your network from which it can be run. This could be an existing, physical and open PLC, or any off-the-shelf hardware that fulfils the system requirements (see below).
 
 <Info>
@@ -85,3 +87,13 @@ Proceeding will then create a CURL command for you to copy and run from your hos
   alt="Onboard 2 Dark"
   width="400"
 />
+
+## Troubleshooting
+
+Once the installation on your host device is complete, verify that the agent is running by executing the following command (replace <your-org-name> with your organization’s name as found in the zip file name):
+
+`docker logs -f agent-agent_<your-device-name>`
+
+This command will display the logs of the running agent, confirming that is has been successfully installed.
+
+## Offboarding / Uninstalling a Device
