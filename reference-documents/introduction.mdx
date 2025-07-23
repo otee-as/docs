@@ -1,33 +1,35 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'Data Types'
+description: 'Available Data Types Overview'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+OTee supports most data types described in IEC 61163-3, like elementary data types, generic data types and user defined data types. 
 
-## Welcome
+Click on the data type field in the Tag Editor to select a data type. Use the search field to get to the correct data type quickly. In addition, hovering over a variable in the code window will display its type in a tooltip for quick reference.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+<Accordion title="Data Types">
+  
+| Data Type | Explanation                          |
+|-----------|--------------------------------------|
+| BOOL      | 1 bit (0,1)                          |
+| BYTE      | 8 bit (1 byte)                       |
+| WORD      | 16 bit (2 byte)                      |
+| DWORD     | 32 bit (4 byte)                      |
+| LWORD     | 64 bit (8 byte)                      |
+| SINT      | Signed short integer (1 byte)        |
+| INT       | Signed integer (2 byte)              |
+| DINT      | Signed double integer (4 byte)       |
+| LINT      | Signed long integer (8 byte)         |
+| USINT     | Unsigned short integer (1 byte)      |
+| UINT      | Unsigned integer (2 byte)            |
+| UDINT     | Unsigned double integer (4 byte)     |
+| ULINT     | Unsigned long integer (8 byte)       |
+| REAL      | Floating point number (4 byte)       |
+| LREAL     | Floating point number (8 byte)       |
+| TIME      | Literals in the form of T#5m90s15ms  |
+| DATE      | Calendar date                        |
+| TOD       | Time of day (Clock time)             |
+| DT        | Date and time                        |
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
 
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+</Accordion>
