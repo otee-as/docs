@@ -56,7 +56,8 @@
           {
             "group": "Reference Documents",
             "pages": [
-              "reference-documents/introduction"
+              "reference-documents/data-types",
+              "reference-documents/functions"
             ]
           },
           {
