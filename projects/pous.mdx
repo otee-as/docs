@@ -114,7 +114,15 @@ Calling the function block will list all available inputs and outputs for you to
   width="300"
 />
 
-
-
 ## Programs
 
+Programs are the highest level POUs and can be written in Structured Text in the Editor. Each program is a network of functions and/or function blocks that controls a machine or process. Therefore, at least one program is required in any project. Shown here is a very simple and shortened section of a program controlling a compressor. Note that variables, function blocks and data types required to run this program are not shown here.
+
+```javascript lines
+motor_compressor.HMI_api := api;
+motor_compressor();
+
+DO_compressor := motor_compressor.outputs.forward;
+```
+
+Programs can then be organized to be run in sequences as defined in your projects resource configuration. Read more about that in the next chapter.
