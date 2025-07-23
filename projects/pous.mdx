@@ -11,15 +11,25 @@ A function can be thought of as a subprogram (often an equation) that has no int
 
 Below is a simple example of a function defined in the Code Editor, together with the according variables and return type defined in the Tag Editor.
 
-```
+``` lines
 difference := minuend - subtrahend;
+
 IF difference < 0 THEN
     ResultIsNegative := TRUE;
 ELSE
     ResultIsNegative := FALSE;
 END_IF;
+
 CalcDifference := difference;
 ```
+
+<Info>
+
+The name of the function POU (as it appears in your project browser on the left-hand side of the screen) must be the same as the return statement inside the code, in this example “CalcDifference”.
+
+</Info>
+
+
 
 <img
   className="block dark:hidden mx-auto"
