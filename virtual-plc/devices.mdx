@@ -3,6 +3,8 @@ title: "Devices"
 description: "Onboard a virtual PLC host device."
 ---
 
+## Onboarding / Installing a Device
+
 Deploying an OTee vPLC to your setup requires a hardware device on your network from which it can be run. This could be an existing, physical and open PLC, or any off-the-shelf hardware that fulfils the system requirements (see below).
 
 <Info>
@@ -93,3 +95,18 @@ Troubleshooting: Once the installation on your host device is complete, verify t
 This command will display the logs of the running agent, confirming that is has been successfully installed or providing useful troubleshooting info otherwise.
 
 </Info>
+
+## Offboarding / Uninstalling a Device
+
+To remove all OTee components from your device, the following command can be executed in the terminal (bash).
+
+Paste and run the following script:
+
+```bash lines
+# Delete containers based on image name
+docker ps -a --format '{{.ID}} {{.Image}}' | awk '$2 ~ /nats:|otee/ {print $1}' | xargs -r docker rm -f && \
+# Delete images based on repository:tag
+docker images --format '{{.Repository}}:{{.Tag}} {{.ID}}' | awk '$1 ~ /nats:|otee/ {print $2}' | xargs -r docker rmi -f && \
+# Clean up unused networks (including non OTee networks)
+docker network prune -f
+```
