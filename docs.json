@@ -59,15 +59,6 @@
               "reference-documents/data-types",
               "reference-documents/functions"
             ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "reference-documents/endpoint/get",
-              "reference-documents/endpoint/create",
-              "reference-documents/endpoint/delete",
-              "reference-documents/endpoint/webhook"
-            ]
           }
         ]
       }
