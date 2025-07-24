@@ -16,7 +16,7 @@
           {
             "group": "Quick Start Guide",
             "pages": [
-              "get-started/index",
+              "get-started/introduction",
               "get-started/sign-up",
               "get-started/onboard-a-device",
               "get-started/import-a-project",
