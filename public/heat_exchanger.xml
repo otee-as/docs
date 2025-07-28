@@ -1,0 +1,649 @@
+<project xmlns="http://www.plcopen.org/xml/tc6_0201">
+  <fileHeader companyName="Unknown" productName="Unnamed" productVersion="1" creationDateTime="2023-09-14T08:06:45"/>
+  <contentHeader name="PlainProject" modificationDateTime="2023-09-14T08:09:26">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="0" y="0"/>
+      </fbd>
+      <ld>
+        <scaling x="0" y="0"/>
+      </ld>
+      <sfc>
+        <scaling x="0" y="0"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="program0" pouType="program" globalId="e8ccb66e-809d-454b-a0a8-78a1173769dd">
+        <interface>
+          <localVars name="Heat exchanger" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="heatExhanger1" globalId="UUID_dea7bb00-2e78-4dcb-b6d1-113a92e35da9">
+              <type>
+                <derived name="FB_heat_exchanger"/>
+              </type>
+              </variable>
+            <variable name="T1_in" globalId="UUID_d19837d6-16cf-4c21-be1e-2537db2d1708">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="40.0"/>
+              </initialValue>
+              </variable>
+            <variable name="T2_in" globalId="UUID_a1aa3914-8f0e-4a0c-b9eb-4f65bcd991e1">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="10.0"/>
+              </initialValue>
+              </variable>
+            <variable name="T1_out" globalId="UUID_dea60ef4-9050-4d41-8f59-c35cc35147f7">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="T2_out" globalId="UUID_c94d70d6-f598-48e3-859e-3a54a56d4394">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="q1" globalId="UUID_598aeceb-b2aa-4a71-95be-802e091f37de">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="140.0"/>
+              </initialValue>
+              </variable>
+            <variable name="q2" globalId="UUID_db035859-7396-47b9-b697-0726b3dabf6e">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="60.0"/>
+              </initialValue>
+              </variable>
+            <variable name="heatTransferNumber" globalId="UUID_b3e74e4a-3211-4e0f-816c-83b79a63f6e9">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="heatTransferArea" globalId="UUID_dde842ab-118c-412e-b5bd-4624fa6a679b">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="volumeDiscretization" globalId="UUID_312b6bdc-5cfe-49fc-afe3-4c6946fe85b2">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="inletFlow_WarmSide" globalId="UUID_3508ca76-be6b-4072-a00e-2727c8587fa0">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+          </localVars>
+          <localVars name="controller" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="Side2_controller" globalId="UUID_b1abd92f-0e4e-491d-ad1e-d8802d8fb773">
+              <type>
+                <derived name="PID"/>
+              </type>
+              </variable>
+            <variable name="PID_kp" globalId="UUID_a0ea9830-b0cf-4199-a744-0199e86b7ec4">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="4.0"/>
+              </initialValue>
+              </variable>
+            <variable name="PID_tr" globalId="UUID_4ae48a41-2e76-4e48-a54c-59698cbff4b1">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="100.0"/>
+              </initialValue>
+              </variable>
+            <variable name="PID_td" globalId="UUID_85259f0c-7efe-4782-8bd4-0dcd24824a2a">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="0.0"/>
+              </initialValue>
+              </variable>
+            <variable name="PID_AUTO" globalId="UUID_6ef2c8a7-c103-47ae-a9c2-f618759e3e9d">
+              <type>
+                <BOOL/>
+              </type>
+              </variable>
+            <variable name="PID_sp" globalId="UUID_06727de3-14c8-4350-b69e-d9e5b2289c17">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="30.0"/>
+              </initialValue>
+              </variable>
+            <variable name="valve_opening" globalId="UUID_6f1c9d87-72bb-464e-924b-843d2f3e59e3">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="PID_X0" globalId="UUID_0f2ae044-1fcb-42e9-ae66-c140c5a598a5">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="12.5"/>
+              </initialValue>
+              </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">(*                  Heat Exchanger&#13;
+&#13;
+side 1 In --&gt;  |  =====&gt;====&gt;====&gt;====&gt;====&gt; |  --&gt; side 1 Out&#13;
+               |                             |&#13;
+               |                             |&#13;
+side 2 Out &lt;-- |  &lt;====&lt;====&lt;====&lt;====&lt;====  |  &lt;-- side 2 In&#13;
+&#13;
+max inlet flow :&#13;
+  side 1 140 m3/h&#13;
+  side 2 60 m3/h&#13;
+&#13;
+Play with the exchanger by changing the following values:&#13;
+  T1_in,T2_in,q1,q2&#13;
+&#13;
+*)&#13;
+&#13;
+heatTransferArea := 37.0; (* m2 *)&#13;
+heatTransferNumber := 4839.0; (* W/m2*K *)&#13;
+volumeDiscretization := 40.0;&#13;
+&#13;
+heatExhanger1(&#13;
+  Volume1 := 0.0047,    (* total volume of side 1 [m3]*)&#13;
+  Volume2 := 0.0038,    (* total volume of side 2 [m3]*)&#13;
+  Temperature1_In := T1_in,    (* Incoming T side 1 [C] *)&#13;
+  Temperature2_In := T2_in,    (* Incoming T side 2 [C] *)&#13;
+  q1 := inletFlow_WarmSide/3600.0,    (* Flow side 1 [m3/s] *)&#13;
+  q2 := q2/3600.0,    (* Flow side 2 [m3/s] *)&#13;
+  Ts := 0.1,    (* sample time [s]*)&#13;
+  U := heatTransferNumber*heatTransferArea/volumeDiscretization,    (* thermal conductivity [W/K] *)&#13;
+  &#13;
+  Temperature1_Out =&gt; T1_out,&#13;
+  Temperature2_Out =&gt; T2_out&#13;
+);&#13;
+&#13;
+Side2_controller(&#13;
+  (* Inputs *)&#13;
+  AUTO := PID_AUTO,&#13;
+  PV := T2_out,&#13;
+  SP := PID_sp,&#13;
+  KP := PID_kp,&#13;
+  TR := PID_tr,&#13;
+  TD := PID_td,&#13;
+  X0 := PID_X0, (* start bias *)&#13;
+  CYCLE := T#100ms&#13;
+);&#13;
+&#13;
+(* output limitation *)&#13;
+if Side2_controller.XOUT &lt; 0.0 then&#13;
+  valve_opening := 100.0;&#13;
+elsif Side2_controller.XOUT &gt; 100.0 then  &#13;
+  valve_opening := 0.0;&#13;
+else &#13;
+  valve_opening := 100.0-Side2_controller.XOUT;&#13;
+end_if;&#13;
+inletFlow_WarmSide := q1*valve_opening/100.0;&#13;
+&#13;
+(* fuzzy antiwindup *)&#13;
+if Side2_controller.XOUT &lt; 0.0 then&#13;
+  PID_AUTO := false;&#13;
+elsif Side2_controller.XOUT &gt; 100.0 then&#13;
+  PID_AUTO := false;&#13;
+ELSE&#13;
+  PID_AUTO := true;&#13;
+END_IF;</xhtml:p>
+          </ST>
+        </body>
+        </pou>
+      <pou name="density" pouType="function" globalId="6161acc0-14c1-46b1-b51c-d2700933c1b7">
+        <interface>
+          <returnType>
+            <REAL/>
+          </returnType>
+          <inputVars name="varGroup_c33c" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="temperature" globalId="UUID_10f44a89-93d5-424f-b71d-ffb1dfe635c6">
+              <type>
+                <REAL/>
+              </type>
+              <documentation>temperature</documentation>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">(* Specific density water *)&#13;
+&#13;
+density := 1000.006621939&#13;
+    + 0.00001626*temperature*temperature*temperature&#13;
+    - 0.00602137*temperature*temperature&#13;
+    + 0.02092985*temperature;</xhtml:p>
+          </ST>
+        </body>
+        </pou>
+      <pou name="heatCapacity" pouType="function" globalId="a1feb9c6-779a-49aa-ac73-8bcd110b5f7d">
+        <interface>
+          <returnType>
+            <REAL/>
+          </returnType>
+          <inputVars name="varGroup_1a63" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="temperature" globalId="UUID_59694563-6f00-49c8-96c7-e7db4f2c76de">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">(* Specific heat capacity water *)&#13;
+heatCapacity := 4201.7217960&#13;
+   - 0.00013861*temperature*temperature*temperature&#13;
+   + 0.03367866*temperature*temperature&#13;
+   - 1.96518738*temperature;</xhtml:p>
+          </ST>
+        </body>
+        </pou>
+      <pou name="alpha" pouType="function" globalId="e8daafa3-a54c-427f-8228-d4497888d257">
+        <interface>
+          <returnType>
+            <REAL/>
+          </returnType>
+          <inputVars name="varGroup_44a5" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="q" globalId="UUID_f1eb70ae-99a2-428f-bf27-bc509c20f59b">
+              <type>
+                <REAL/>
+              </type>
+              <documentation>flow (m/3)</documentation>
+            </variable>
+            <variable name="Ts" globalId="UUID_868a77ce-b93e-4e44-b803-6d193eb334e5">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="0.1"/>
+              </initialValue>
+              <documentation>sample time</documentation>
+            </variable>
+            <variable name="V" globalId="UUID_8b3ed086-197d-4724-b387-fd789b8160ee">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="1.0"/>
+              </initialValue>
+              <documentation>volume</documentation>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">alpha := q*Ts/V;</xhtml:p>
+          </ST>
+        </body>
+        </pou>
+      <pou name="omega" pouType="function" globalId="3180a3cc-b533-44a5-a63d-16adfe1eb484">
+        <interface>
+          <returnType>
+            <REAL/>
+          </returnType>
+          <inputVars name="varGroup_44a5" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="U" globalId="6c127374-6183-430e-a166-a9bdbb26d81e">
+              <type>
+                <REAL/>
+              </type>
+              <documentation>thermal conductivity</documentation>
+            </variable>
+            <variable name="Ts" globalId="f85333d2-0f07-4e8e-bb33-8d4f2e10d7cd">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="0.1"/>
+              </initialValue>
+              <documentation>sample time</documentation>
+            </variable>
+            <variable name="V" globalId="UUID_2475f87b-2a02-4215-b5dd-85bf73350098">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="1.0"/>
+              </initialValue>
+              <documentation>Volume</documentation>
+            </variable>
+            <variable name="Temperature" globalId="UUID_82c88102-ab31-4d84-8784-fa6e7f510050">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="20.0"/>
+              </initialValue>
+              <documentation>temperature</documentation>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">omega := U*Ts/( density(Temperature)*heatCapacity(Temperature)*V );</xhtml:p>
+          </ST>
+        </body>
+        </pou>
+      <pou name="FB_heat_exchanger" pouType="functionBlock" globalId="855a4b3b-fa42-4810-aee1-0678c4bcd27f">
+        <interface>
+          <localVars name="constants" constant="true" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="numberOfTanks" globalId="UUID_9a548eb4-382c-4d8a-b17b-f67cd785d317">
+              <type>
+                <INT/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="40"/>
+              </initialValue>
+              <documentation>discretization </documentation>
+            </variable>
+          </localVars>
+          <localVars name="varGroup_ffa7" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="index" globalId="UUID_7d3d0ea0-4a43-44c9-a4c7-e7665f98c9ac">
+              <type>
+                <INT/>
+              </type>
+              </variable>
+            <variable name="T1_k1" globalId="UUID_f0123697-0162-4e8e-ab9f-02099f49c9f3">
+              <type>
+                <array>
+                  <dimension lower="0" upper="40"/>
+                  <baseType>
+                    <REAL/>
+                  </baseType>
+                </array>
+              </type>
+              <documentation>T1[k+1] Temp side 1, next timestep</documentation>
+            </variable>
+            <variable name="T2_k1" globalId="UUID_e5c0fbda-f24a-40bd-93e2-fd7054ffae0f">
+              <type>
+                <array>
+                  <dimension lower="0" upper="40"/>
+                  <baseType>
+                    <REAL/>
+                  </baseType>
+                </array>
+              </type>
+              <documentation>T2[k+1] Temp side 2, next timestep</documentation>
+            </variable>
+            <variable name="T1_k" globalId="UUID_f5cdf804-9f3f-4c83-8e96-18c93236d12b">
+              <type>
+                <array>
+                  <dimension lower="0" upper="40"/>
+                  <baseType>
+                    <REAL/>
+                  </baseType>
+                </array>
+              </type>
+              <documentation>T1[k+1] Temp side 1, this timestep</documentation>
+            </variable>
+            <variable name="T2_k" globalId="UUID_6662a384-6fc9-442d-b3c7-2b53ea4b1eb7">
+              <type>
+                <array>
+                  <dimension lower="0" upper="40"/>
+                  <baseType>
+                    <REAL/>
+                  </baseType>
+                </array>
+              </type>
+              <documentation>T2[k+1] Temp side 2, this timestep</documentation>
+            </variable>
+            <variable name="isInitialized" globalId="UUID_96bfba8f-0e1a-420b-ab83-85bb8c295819">
+              <type>
+                <BOOL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="false"/>
+              </initialValue>
+              </variable>
+          </localVars>
+          <localVars name="varGroup_2368" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="t1k1" globalId="UUID_da985cf1-1d06-4c3c-9d18-2e6979d711b7">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="a1" globalId="UUID_0b5f5716-5565-4756-8f9e-b0b604d69582">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="b1" globalId="UUID_befd64d1-08ca-4b20-9782-098892026c2c">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="o1" globalId="UUID_1a3ffe09-bbde-482b-b7c5-f23c2326e087">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="dens" globalId="UUID_7abfe8b1-4fb0-4fe0-9031-8aabf6e80e09">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="heatCap" globalId="UUID_c8a54673-9a78-4be5-92f4-d7ea987e853c">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+          </localVars>
+          <inputVars name="varGroup_fc5c" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="Volume1" globalId="UUID_cbdefb07-4829-47d0-ac1f-744faca13cc3">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="1.0"/>
+              </initialValue>
+              <documentation>total volume of side 1 [m3]</documentation>
+            </variable>
+            <variable name="Volume2" globalId="UUID_492e29bd-f8cf-4d45-9f51-0c0f4f4af7de">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="1.0"/>
+              </initialValue>
+              <documentation>total volume of side 2 [m3]</documentation>
+            </variable>
+            <variable name="Temperature1_In" globalId="UUID_7ab48dd3-2cfc-4f29-a025-f9b32871ba61">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="20.0"/>
+              </initialValue>
+              <documentation>Incoming T side 1</documentation>
+            </variable>
+            <variable name="Temperature2_In" globalId="UUID_d1b354fc-d89e-4115-9faf-23c370a57831">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="20.0"/>
+              </initialValue>
+              <documentation>Incoming T side 2</documentation>
+            </variable>
+            <variable name="q1" globalId="UUID_f6f6e4ce-9c02-41fb-a52b-8eab8f737c29">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="1.0"/>
+              </initialValue>
+              <documentation>Flow side 1 m3/s</documentation>
+            </variable>
+            <variable name="q2" globalId="UUID_f2ed94b4-7c23-4b8d-94e7-a6db226d7301">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="1.0"/>
+              </initialValue>
+              <documentation>Flow side 2 m3/s</documentation>
+            </variable>
+            <variable name="Ts" globalId="UUID_a2fb5259-4aef-442b-b7f9-a64be0582269">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="0.1"/>
+              </initialValue>
+              <documentation>sample time</documentation>
+            </variable>
+            <variable name="U" globalId="UUID_99a47678-2f28-4b70-b04a-df844b11f0a0">
+              <type>
+                <REAL/>
+              </type>
+              <documentation>thermal conductivity[W/K]</documentation>
+            </variable>
+          </inputVars>
+          <outputVars name="varGroup_e821" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="Temperature1_Out" globalId="UUID_d67500a0-48a5-4290-a09d-723797172f57">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+            <variable name="Temperature2_Out" globalId="UUID_8cbf8b1b-d3b2-4af3-9c08-7af858779415">
+              <type>
+                <REAL/>
+              </type>
+              </variable>
+          </outputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">if NOT isInitialized then&#13;
+    isInitialized := true;&#13;
+    FOR index := 0 TO numberOfTanks DO&#13;
+        T1_k[index] := Temperature2_In;&#13;
+        T2_k[index] := Temperature2_In;&#13;
+    END_FOR;&#13;
+    dens := density(T1_k[0]);&#13;
+    heatCap := heatCapacity(T1_k[0]);&#13;
+    a1 := alpha(q:=q1, Ts:=Ts, V:=Volume1)*T1_k[0];&#13;
+    b1 := beta(U:=U, Ts:=Ts, V:=Volume1, Temperature:=T1_k[1], q:=q1)*T1_k[1];&#13;
+    o1 := omega(U:=U, Ts:=Ts, V:=Volume1, Temperature:=T1_k[1])*T2_k[40];&#13;
+        &#13;
+    t1k1 := a1+b1+o1;&#13;
+END_IF;&#13;
+&#13;
+T1_k[0] := Temperature1_In;&#13;
+T2_k[0] := Temperature2_In;&#13;
+FOR index := 1 TO numberOfTanks DO&#13;
+    T1_k1[index] := alpha(q:=q1, Ts:=Ts, V:=Volume1)*T1_k[index-1]&#13;
+        +beta(U:=U, Ts:=Ts, V:=Volume1, Temperature:=T1_k[index], q:=q1)*T1_k[index]&#13;
+        +omega(U:=U, Ts:=Ts, V:=Volume1, Temperature:=T1_k[index])*T2_k[numberOfTanks-index+1];&#13;
+    T2_k1[index] := alpha(q:=q2, Ts:=Ts, V:=Volume2)*T2_k[index-1]&#13;
+        +beta(U:=U, Ts:=Ts, V:=Volume2, Temperature:=T2_k[index], q:=q2)*T2_k[index]&#13;
+        +omega(U:=U, Ts:=Ts, V:=Volume2, Temperature:=T2_k[index])*T1_k[numberOfTanks-index+1];&#13;
+END_FOR;&#13;
+&#13;
+Temperature1_Out := T1_k[numberOfTanks];&#13;
+Temperature2_Out := T2_k[numberOfTanks];&#13;
+&#13;
+(* Move next step into current step *)&#13;
+T1_k := T1_k1;&#13;
+T2_k := T2_k1;&#13;
+</xhtml:p>
+          </ST>
+        </body>
+        <documentation>This is a heat exchanger FB</documentation>
+      </pou>
+      <pou name="beta" pouType="function" globalId="fcbde407-d48a-4d96-ae7f-69e39e9ef95e">
+        <interface>
+          <returnType>
+            <REAL/>
+          </returnType>
+          <inputVars name="varGroup_44a5" constant="false" retain="false" nonretain="false" persistent="false" nonpersistent="false">
+            <variable name="U" globalId="25cd8c98-9d1d-4fe5-9898-98c1e0729b2f">
+              <type>
+                <REAL/>
+              </type>
+              <documentation>thermal conductivity</documentation>
+            </variable>
+            <variable name="Ts" globalId="f7166bfb-603b-4265-8110-e54277e0e05e">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="0.1"/>
+              </initialValue>
+              <documentation>sample time</documentation>
+            </variable>
+            <variable name="V" globalId="65de36df-9d47-44fb-9cac-3cc70b544099">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="1.0"/>
+              </initialValue>
+              <documentation>Volume</documentation>
+            </variable>
+            <variable name="Temperature" globalId="18635a09-ec8d-4f74-b863-73a2a50909e1">
+              <type>
+                <REAL/>
+              </type>
+              <initialValue repetitionValue="1">
+                <simpleValue value="20.0"/>
+              </initialValue>
+              <documentation>temperature</documentation>
+            </variable>
+            <variable name="q" globalId="UUID_435863d3-f504-4aab-87c5-a818b32c713d">
+              <type>
+                <REAL/>
+              </type>
+              <documentation>flow</documentation>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">beta := 1.0 - omega(U:=U, Ts:=Ts, V:=V,Temperature:=Temperature) - alpha(q:=q, Ts:=Ts, V:=V);</xhtml:p>
+          </ST>
+        </body>
+        </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations>
+      <configuration name="config" globalId="5383f879-0adc-4202-9f7a-7140b50c7a55">
+        <resource name="resource1">
+          <task name="task0" interval="T#100ms" priority="0">
+            <pouInstance name="instance0" typeName="program0"/>
+          </task>
+        </resource>
+      </configuration>
+    </configurations>
+  </instances>
+  <addData>
+    <data name="modbus">{'name': 'modbus', 'configs': []}</data>
+    <data name="PROJECT_DOCS_ENSURED">true</data>
+    <data name="runtimeId">ecaa8542-5873-4240-82a4-33b4cce01838</data>
+    <data name="driver_5325ad15-44b8-4771-95b6-560f9fa45d3f">{'name': 'modbus', 'configs': [{'clients': [{'confnode': {'Remote_IP_Address': 'localhost', 'Configuration_Name': 'Modbus TCP Client 96c31d0963', 'Remote_Port_Number': 502, 'Request_Delay_in_ms': 0, 'Invocation_Rate_in_ms': 100}, 'requests': [{'symbols': [{'confnode': {'address': '%MW0.0.0.0'}, 'baseconfnode': {'Name': 'current', 'IEC_Channel': 0}}, {'confnode': {'address': '%MW0.0.0.1'}, 'baseconfnode': {'Name': 'speed', 'IEC_Channel': 1}}, {'confnode': {'address': '%MW0.0.0.2'}, 'baseconfnode': {'Name': 'torque', 'IEC_Channel': 2}}], 'confnode': {'SlaveID': 1, 'Function': '03 - Read Holding Registers', 'Start_Address': 0, 'Timeout_in_ms': 30, 'Nr_of_Channels': 3, 'Write_on_change': False}, 'baseconfnode': {'Name': 'analogSignals', 'IEC_Channel': 0}}], 'baseconfnode': {'Name': 'motor1', 'IEC_Channel': 0}}], 'servers': [], 'confnode': {'MaxRemoteTCPclients': 3}, 'baseconfnode': {'Name': 'modbus_0', 'IEC_Channel': 0}}], 'globalId': '5325ad15-44b8-4771-95b6-560f9fa45d3f'}</data>
+  </addData>
+</project>
