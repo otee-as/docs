@@ -94,7 +94,11 @@ Once the installation on your host device is complete, verify that the agent is 
 
 `docker logs -f agent-agent_<your-device-name>`
 
-This command will display the logs of the running agent, confirming that is has been successfully installed.
+This command will display the logs of the running agent, informing whether it has been successfully installed. Next, you may produce the logs for the publish-subscribe component on your device, by running the following command (replace &lt;your-device-name&gt; with the name you have chosen during the onboarding process):
+
+`docker logs -f nats-nats_<your-device-name>`
+
+If you're detecting any errors in these logs, send them over to your friends at OTee or reach out to the community via OTee's Discord server.
 
 ## Offboarding / Uninstalling a Device
 
