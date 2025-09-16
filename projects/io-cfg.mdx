@@ -21,4 +21,22 @@ In the top bar of your project browser pane, press the “Create an entity” bu
 
 The configuration happens in two steps, where the first one is the client configuration itself, and the second one is the Modbus request configuration. You can create one or multiple clients, and within each client you can create one or multiple requests.
 
-As you set up your requests (click on a request to expand or collapse it), you can map Modbus memory addresses to your own, user-defined symbols via the “Driver symbols” table for better readability and practical re-use throughout your project. In practice, when you assign a memory address to tags in your POUs or global variables, you will now be able to select the according symbols rather than working with the rather cryptic memory addresses directly.
+As you set up your requests (click on a request header to expand or collapse it), you can map Modbus memory addresses to your own, user-defined symbols via the “Driver symbols” table for better readability and practical re-use throughout your project. In practice, when you assign a Modbus address to tags in your POUs or global variables, you will now be able to select the according symbols instead of working with the rather cryptic memory addresses directly.
+
+## EtherNet/IP
+
+<img
+  className="block dark:hidden mx-auto"
+  src="/images/eip-cfg-1-light.png"
+  alt="EIP Configuration Light"
+/>
+
+<img
+  className="hidden dark:block mx-auto"
+  src="/images/eip-cfg-1-dark.png"
+  alt="EIP Configuration Dark"
+/>
+
+The configuration happens in two steps, where the first one is the EtherNet/IP client configuration, and the second is the creation and configuration of Connections. You can create one or multiple clients, and within each client you can create one or multiple connections.
+
+As you set up your connections (click on a connection header to expand or collapse it), you can map EIP memory addresses to your own, user-defined symbols via the “Target to Originator (Input) symbols” and "Originator to Target (Output) symbols" table, respectively. This is for better readability and practical re-use throughout your project. When you assign an EIP address to tags in your POUs or global variables, you will now be able to select the according symbols instead of working with the rather cryptic memory addresses directly.
