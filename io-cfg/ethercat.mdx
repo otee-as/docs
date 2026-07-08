@@ -1,0 +1,34 @@
+---
+title: "EtherCAT"
+description: "Configure your vPLC to communicate via EtherCAT."
+---
+
+<Info>
+
+Prerequisites controlling EtherCAT networks through the OTee Platform: 
+
+* EtherCAT device manufacturer's ESI file(s)
+
+* EtherCAT-enabled runtime: Hit the "Add EtherCAT support" button on your runtime's service management page and follow the configuration steps
+
+* EtherCAT-capable runtime: Note that not all OTee vPLCs are EtherCAT-ready, and you may have to upgrade your plan and/or components
+
+</Info>
+
+In the top bar of your project browser pane, press the “Create an entity” button. Select “Driver configuration” from the drop-down menu in the “Type” field, then select "EtherCAT" from the drop-down menu in the “Driver” field. This will create an EtherNet/IP node in your project browser tree. Select the node to access the driver configuration.
+
+<img
+  className="block dark:hidden mx-auto"
+  src="/images/ecat-light.png"
+  alt="EtherCAT Configuration Light"
+/>
+
+<img
+  className="hidden dark:block mx-auto"
+  src="/images/ecat-dark.png"
+  alt="EtherCAT Configuration Dark"
+/>
+
+The configuration happens in multiple steps and is based on your EtherCAT device manufacturer's ESI files. Depending on the files' depth, you will be prompted to select the device(s) and -- where applicable -- I/O module(s) from a list of available options. Note that you can always create more slave devices and provide additional ESI files later on.
+
+Based on your selected devices and I/O modules, most information will be automatically filled in; however, you may want to choose your own symbol names to make working with your newly defined EtherCAT signals inside your projects easier. You are now able to reference EtherCAT signals directly from inside your project's POUs (e.g., a program): Create a variable, expand its metadata and select your EtherCAT symbols from the context menu that opens when you click the "device address" field.
