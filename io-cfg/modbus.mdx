@@ -46,6 +46,18 @@ These settings apply to a client regardless of which protocol it uses:
 | Data bits      | Data package length: 7 or 8 (default). Must match every slave device on the bus.                                                                                                                                              |
 | Stop bits      | Number of stop bits terminating each data package: 1 (default) or 2. Must match every slave device on the bus.                                                                                                               |
 
+<img
+  className="block dark:hidden mx-auto"
+  src="/images/modbus-rtu-cfg-light.png"
+  alt="Modbus RTU Configuration Light"
+/>
+
+<img
+  className="hidden dark:block mx-auto"
+  src="/images/modbus-rtu-cfg-dark.png"
+  alt="Modbus RTU Configuration Dark"
+/>
+
 As you set up your requests, also known as commands or messages (click on a request header to expand or collapse them), you can map Modbus memory addresses to your own, user-defined symbols via the “Driver symbols” table for better readability and practical re-use throughout your project. In practice, when you assign a Modbus address to tags in your POUs or global variables, you will now be able to select the according symbols instead of working with the rather cryptic memory addresses directly.
 
 The supported function codes are:
