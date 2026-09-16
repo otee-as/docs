@@ -1,6 +1,6 @@
 ---
-title: "Modbus TCP"
-description: "Configure your vPLC to communicate via Modbus TCP."
+title: "Modbus"
+description: "Configure your vPLC to communicate via Modbus TCP or Modbus RTU (serial)."
 ---
 
 In the top bar of your project browser pane, press the “Create an entity” button. Select “Driver configuration” from the drop-down menu in the “Type” field, then select "Modbus" from the drop-down menu in the “Driver” field. This will create a Modbus node in your project browser tree. Select the node to access the driver configuration.
@@ -19,14 +19,32 @@ In the top bar of your project browser pane, press the “Create an entity” bu
 
 The configuration happens in two steps, where the first one is the client configuration itself, and the second one is the Modbus request configuration. You can create one or multiple clients, and within each client you can create one or multiple requests.
 
-For the client configuration, use the topmost field to specify your device's name. Next, configure some more client settings (see table below) before setting up individual Modbus requests next.
+For the client configuration, use the topmost field to specify your device's name. Next, choose a **Protocol**: **Modbus TCP** talks to the target device over the network, while **Modbus RTU (serial)** talks to it over a serial line (RS-485 or RS-232). The connection fields below it change depending on which protocol you pick — see the two tables below — before setting up individual Modbus requests next.
+
+These settings apply to a client regardless of which protocol it uses:
+
+| Field Name                     | Explanation                                                                                                                                                                                                                    |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Invocation rate, ms            | The interval in milliseconds between sending of requests.                                                                                                                                                                    |
+| Request delay, ms              | The delay in milliseconds between the end of the previous response and the beginning of the next request to be sent, if needed.                                                                                             |
+| Use "1" based addressing       | Enable if the target device uses 1-based Modbus addressing (where address 1 is the first register, matching e.g. Modbus address 40001 → offset 1) rather than 0-based addressing. Devices vary on this, so check your device's documentation. When enabled, 1 is added to all of this client's request start addresses at build time; leave it unchecked (the default) for 0-based devices. |
+
+### Modbus TCP
 
 | Field Name            | Explanation                                                                                                                       |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| Invocation rate, ms   | The interval in milliseconds between sending of requests.                                                                         |
-| Request delay, ms     | The delay in milliseconds between the end of the previous response and the beginning of the next request to be sent, if needed.   |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | Remote IP address     | The IP address of the Modbus TCP server.                                                                                          |
 | Remote port number    | The port number that the Modbus TCP server is listening on, usually 502 or 1502.                                                  |
+
+### Modbus RTU (serial)
+
+| Field Name    | Explanation                                                                                                                                                                                                                     |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Serial port    | The serial device to communicate over, e.g. `/dev/ttyUSB0`. If the device has already been mapped into the runtime's container under Device Management (also called Service Management) on [platform.otee.com](https://platform.otee.com/devices), you can pick it from a dropdown here; otherwise enter the device path directly. Each serial port can only be driven by one client — if two clients are configured to use the same port, OTee will flag a configuration error on both. |
+| Baud rate      | Communication speed of the serial line. Must match every slave device on the bus. Supported values: 110, 300, 600, 1200, 2400, 4800, 9600 (default), 19200, 38400, 57600, 115200.                                          |
+| Parity         | Parity checking of the data stream: None (default), Odd, or Even. Must match every slave device on the bus.                                                                                                                  |
+| Data bits      | Data package length: 7 or 8 (default). Must match every slave device on the bus.                                                                                                                                              |
+| Stop bits      | Number of stop bits terminating each data package: 1 (default) or 2. Must match every slave device on the bus.                                                                                                               |
 
 As you set up your requests, also known as commands or messages (click on a request header to expand or collapse them), you can map Modbus memory addresses to your own, user-defined symbols via the “Driver symbols” table for better readability and practical re-use throughout your project. In practice, when you assign a Modbus address to tags in your POUs or global variables, you will now be able to select the according symbols instead of working with the rather cryptic memory addresses directly.
 
@@ -43,7 +61,7 @@ The supported function codes are:
 For each request, you need to set the following input fields:
 
 | Field Name            | Explanation                                                                                                                                                                                   |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Slave ID              | The slave ID (unit ID) of the device that will receive the requests.                                                                                                                          |
 | Timeout, ms           | The request timeout in milliseconds, i.e., the time allowed for the server to respond before the client gives up.                                                                             |
 | Number of channels    | The number of registers to be read/written.                                                                                                                                                   |
@@ -51,4 +69,3 @@ For each request, you need to set the following input fields:
 |Write on change        | Applies to function codes 5, 6, 15, and 16 only. If checked, requests will only be sent when the linked variables change. Otherwise, they'll be sent as per the invocation rate as usual.     |
 
 Once the request settings have been filled in, the symbol table to the right will update according to the specified starting address and number of channels. These symbols, one for each register, will be used to link the Modbus registers to program variables. You can rename the symbols as desired and reference them from variables within your project's POUs.
-
