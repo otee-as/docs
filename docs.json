@@ -44,6 +44,7 @@
             "group": "I/O Protocols and Drivers",
             "pages": [
               "io-cfg/modbus",
+              "io-cfg/ethercat",
               "io-cfg/ethernetip",
               "io-cfg/directio",
               "io-cfg/namespace"
