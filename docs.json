@@ -37,6 +37,7 @@
             "pages": [
               "projects/create-import",
               "projects/pous",
+              "projects/ladder-diagram",
               "projects/resource-cfg"
             ]
           },
