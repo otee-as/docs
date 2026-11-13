@@ -38,6 +38,7 @@
               "projects/create-import",
               "projects/pous",
               "projects/ladder-diagram",
+              "projects/libraries",
               "projects/resource-cfg"
             ]
           },
